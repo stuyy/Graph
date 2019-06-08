@@ -13,21 +13,33 @@ public class Graph {
 			this.map.put(node, new ArrayList<Edge>());
 	}
 	
-	public void addEdge(VertexNode A, VertexNode B)
+	public void addEdge(VertexNode A, VertexNode B) throws Exception
 	{
 		// Need to check if both Vertices are in the Graph/Map.
-		if(this.map.containsKey(A.nodeData) && this.map.containsKey(B.nodeData))
+		if(this.map.containsKey(A.nodeData) && this.map.containsKey(B.nodeData)) // If both Nodes are found
 		{
 			this.map.get(A.nodeData).add(new Edge(A, B));
 			this.map.get(B.nodeData).add(new Edge(B, A));
 		}
+		else if(!this.map.containsKey(A.nodeData) && this.map.containsKey(B.nodeData)) // If Node A is not in the Graph, but Node B is.
+		{
+			this.map.put(A.nodeData, new ArrayList<Edge>());
+			this.map.get(A.nodeData).add(new Edge(A, B));
+			this.map.get(B.nodeData).add(new Edge(B, A));
+		}
+		else {
+			throw new Exception("VertexNode not found.");
+		}
 	}
-	public void addEdge(String A, String B)
+	public void addEdge(String A, String B) throws Exception
 	{
 		if(this.map.containsKey(A) && this.map.containsKey(B))
 		{
 			this.map.get(A).add(new Edge(new VertexNode(A), new VertexNode(B)));
 			this.map.get(B).add(new Edge(new VertexNode(B), new VertexNode(A)));
+		}
+		else {
+			throw new Exception("VertexNode not found.");
 		}
 	}
 	public void printVertices()
@@ -48,19 +60,5 @@ public class Graph {
 		return this.map.containsKey(vertex) ? this.map.get(vertex) : null; 
 	}
 	
-	public static void main(String [] args)
-	{
-		Graph graph = new Graph();
-		// Add all vertices.
-		graph.addVertex("Anson");
-		graph.addVertex("Joshua");
-		graph.addVertex("Jack");
-		
-		// Add all edges
-		graph.addEdge(new VertexNode("Anson"), new VertexNode("Joshua"));
-		graph.addEdge("Anson", "Jack");
-		ArrayList<Edge> edges = graph.getEdges("Anson");
-		for(Edge e : edges)
-			System.out.println(e.firstNode.nodeData + "-" + e.secondNode.nodeData);
-	}
+	
 }
