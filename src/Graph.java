@@ -36,6 +36,11 @@ public class Graph {
 		}
 	}
 	
+	public ArrayList<Edge> getEdges(String vertex)
+	{
+		return this.map.containsKey(vertex) ? this.map.get(vertex) : null;
+	}
+	
 	public static void main(String [] args)
 	{
 		Graph graph = new Graph();
@@ -45,5 +50,10 @@ public class Graph {
 		graph.addEdge(new VertexNode("Anson"), new VertexNode("Joshua"));
 		graph.addEdge(new VertexNode("Anson"), new VertexNode("Jack"));
 		graph.printVertices();
+		
+		ArrayList<Edge> edges = graph.getEdges("Anson");
+		
+		for(Edge e : edges)
+			System.out.println(e.firstNode.nodeData + "-" + e.secondNode.nodeData);
 	}
 }
