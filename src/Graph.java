@@ -22,6 +22,14 @@ public class Graph {
 			this.map.get(B.nodeData).add(new Edge(B, A));
 		}
 	}
+	public void addEdge(String A, String B)
+	{
+		if(this.map.containsKey(A) && this.map.containsKey(B))
+		{
+			this.map.get(A).add(new Edge(new VertexNode(A), new VertexNode(B)));
+			this.map.get(B).add(new Edge(new VertexNode(B), new VertexNode(A)));
+		}
+	}
 	public void printVertices()
 	{
 		for(Map.Entry<String, ArrayList<Edge>> adj : this.map.entrySet())
@@ -36,23 +44,22 @@ public class Graph {
 		}
 	}
 	
-	public ArrayList<Edge> getEdges(String vertex)
-	{
-		return this.map.containsKey(vertex) ? this.map.get(vertex) : null;
+	public ArrayList<Edge> getEdges(String vertex) { 
+		return this.map.containsKey(vertex) ? this.map.get(vertex) : null; 
 	}
 	
 	public static void main(String [] args)
 	{
 		Graph graph = new Graph();
+		// Add all vertices.
 		graph.addVertex("Anson");
 		graph.addVertex("Joshua");
 		graph.addVertex("Jack");
+		
+		// Add all edges
 		graph.addEdge(new VertexNode("Anson"), new VertexNode("Joshua"));
-		graph.addEdge(new VertexNode("Anson"), new VertexNode("Jack"));
-		graph.printVertices();
-		
+		graph.addEdge("Anson", "Jack");
 		ArrayList<Edge> edges = graph.getEdges("Anson");
-		
 		for(Edge e : edges)
 			System.out.println(e.firstNode.nodeData + "-" + e.secondNode.nodeData);
 	}
