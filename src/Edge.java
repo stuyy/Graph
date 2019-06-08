@@ -9,4 +9,8 @@ public class Edge {
 		this.firstNode = first;
 		this.secondNode = second;
 	}
+	public Edge()
+	{
+		
+	}
 }
