@@ -37,23 +37,43 @@ public class ADTGraph {
 		if(this.map.containsKey(a) && this.map.containsKey(b)) // Check if the Map has Vertex 'a', we're adding VertexNode b to VertexNode  a's ArrayList of VertexNodes.
 		{	// If true, then we will check 
 			if(this.map.get(a).contains(b) || this.map.get(b).contains(a))
-			{
 				System.out.println("No duplicates.");
-			}
 			else {
 				this.map.get(a).add(b);
 				this.map.get(b).add(a);
 			}
 		}
-		else if(this.map.containsKey(a)  && !this.map.containsKey(b)) // If VertexNode a is a Vertex, but VertexNode b is not, we add b as a Vertex, and then add the edges.
+		else if(this.map.containsKey(a) && !this.map.containsKey(b)) // If VertexNode a is a Vertex, but VertexNode b is not, we add b as a Vertex, and then add the edges.
 		{
 			System.out.println("Node "+   a.nodeData + " exists, but node " + b.nodeData + " doesnt.");
-			this.map.putIfAbsent(b, new HashSet<VertexNode>());
-			this.map.get(a).add(b);
-			this.map.get(b).add(a);
+			this.addEdge(b, a, false);
+		}
+		else if(this.map.containsKey(b) && !this.map.containsKey(a))
+		{
+			System.out.println("Node "+   b.nodeData + " exists, but node " + a.nodeData + " doesnt.");
+			this.addEdge(a, b, false);
 		}
 		else {
 			System.out.println("Not found");
+		}
+	}
+	
+	/**
+	 * Utility function to insert Vertices.
+	 * @param a - The node to insert to the Map if it does not exist.
+	 * @param b - The edge to add.
+	 * @param flag - If true, insert both nodes as Vertices, if false, insert only one.
+	 */
+	private void addEdge(VertexNode a, VertexNode b, boolean flag)
+	{
+		if(flag)
+		{
+			
+		}
+		else {
+			this.map.putIfAbsent(a, new HashSet<VertexNode>());
+			this.map.get(a).add(b);
+			this.map.get(b).add(a);
 		}
 	}
 	
