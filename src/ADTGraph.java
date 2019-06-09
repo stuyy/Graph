@@ -1,5 +1,9 @@
 import java.util.*;
-
+/**
+ * ADTGraph is an implementation of the Abstract Graph Data Structure.
+ * @author Anson
+ *
+ */
 public class ADTGraph {
 	
 	private LinkedHashMap<VertexNode, LinkedHashSet<VertexNode>> map = new LinkedHashMap<>();
@@ -38,7 +42,7 @@ public class ADTGraph {
 		else if(this.map.containsKey(b) && !this.map.containsKey(a))
 			this.addEdge(a, b, false);
 		else {
-			System.out.println("Not found");
+			this.addEdge(a, b, true);
 		}
 	}
 	
@@ -53,6 +57,10 @@ public class ADTGraph {
 		if(flag)
 		{
 			// Add both nodes as a Vertex, and then add their edges.
+			this.map.put(a, new LinkedHashSet<VertexNode>());
+			this.map.put(b, new LinkedHashSet<VertexNode>());
+			this.map.get(a).add(b);
+			this.map.get(b).add(a);
 		}
 		else {
 			this.map.putIfAbsent(a, new LinkedHashSet<VertexNode>());
@@ -111,12 +119,12 @@ public class ADTGraph {
 		return matrix;
 	}
 	
-	public void DFT(VertexNode start)
+	public void DFS(VertexNode start)
 	{
 		Stack<VertexNode> visitedNodes = new Stack<>();
-		this.DFT(start, visitedNodes);
+		this.DFS(start, visitedNodes);
 	}
-	public void DFT(VertexNode start, Stack visited)
+	private void DFS(VertexNode start, Stack visited)
 	{
 		visited.push(start);
 		System.out.println("Vertex = " + start.nodeData);
@@ -125,7 +133,7 @@ public class ADTGraph {
 		while(iter.hasNext()){
 			VertexNode next = iter.next();
 			if(!visited.contains(next))
-				this.DFT(next, visited);
+				this.DFS(next, visited);
 		}
 	}
 }

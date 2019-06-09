@@ -23,6 +23,8 @@ public class GraphDriver {
 		graph.addEdge(new VertexNode("D"), new VertexNode("E"));
 		graph.addVertex(new VertexNode("F"));
 		graph.addEdge(new VertexNode("F"), new VertexNode("E"));
+
+		graph.addEdge(new VertexNode("G"), new VertexNode("H"));
 		graph.printVertices();
 		
 		int [][] matrix  = graph.getMatrixRepresentation();
@@ -33,6 +35,7 @@ public class GraphDriver {
 			System.out.println();
 		}
 		
-		graph.DFT(new VertexNode("F"));
+		graph.DFS(new VertexNode("F"));
+		
 	}
 }
