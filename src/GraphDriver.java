@@ -21,6 +21,8 @@ public class GraphDriver {
 		
 		graph.addEdge(b, new VertexNode("C"));
 		graph.addEdge(new VertexNode("D"), new VertexNode("E"));
+		graph.addVertex(new VertexNode("F"));
+		graph.addEdge(new VertexNode("F"), new VertexNode("E"));
 		graph.printVertices();
 		
 		int [][] matrix  = graph.getMatrixRepresentation();

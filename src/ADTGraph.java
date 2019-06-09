@@ -93,6 +93,10 @@ public class ADTGraph {
 		}
 	}
 	
+	/**
+	 * Produces an VxV adjacency matrix of the Graph in O(n^2) time complexity
+	 * @return the VxV matrix where V = number of vertices.
+	 */
 	public int [][] getMatrixRepresentation()
 	{
 		int [][] matrix = new int[this.map.size()][this.map.size()];
@@ -104,7 +108,6 @@ public class ADTGraph {
 		for(Map.Entry<VertexNode, LinkedHashSet<VertexNode>> entries : this.map.entrySet())
 		{
 			LinkedHashSet<VertexNode> nodes = entries.getValue();
-			
 			for(int j = 0; j < this.map.size(); j++)
 				if(nodes.contains(list.get(j)))
 					matrix[i][j] = 1;
