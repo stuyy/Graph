@@ -12,8 +12,13 @@ public class GraphDriver {
 		graph.addVertex(a);
 		graph.addVertex(b);
 		graph.addEdge(a, b);
-		graph.addEdge(a, b);
+		graph.addEdge(a, new VertexNode("C"));
 		graph.printEdges(a);
+		
+		graph.addVertex(new VertexNode("C"));
+		
+		graph.printVertices();
+		
 		long end = System.nanoTime();
 		double totalTimeElapsed = end-start;
 		System.out.printf("%f\n", totalTimeElapsed/1000000000);

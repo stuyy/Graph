@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.ArrayList;
 
 public class ADTGraph {
@@ -55,4 +56,15 @@ public class ADTGraph {
 			System.out.println(node.nodeData);
 	}
 	
+	public void printVertices()
+	{
+		for(Map.Entry<VertexNode, HashSet<VertexNode>> entry : this.map.entrySet())
+		{
+			System.out.println("Vertex: " + entry.getKey().nodeData);
+			System.out.print("Edges: ");
+			for(VertexNode edge : entry.getValue())
+				System.out.print(edge.nodeData + " ");
+			System.out.println();
+		}
+	}
 }
