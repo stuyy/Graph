@@ -1,9 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
 public class ADTGraph {
 	
@@ -114,5 +109,23 @@ public class ADTGraph {
 			i++;
 		}
 		return matrix;
+	}
+	
+	public void DFT(VertexNode start)
+	{
+		Stack<VertexNode> visitedNodes = new Stack<>();
+		this.DFT(start, visitedNodes);
+	}
+	public void DFT(VertexNode start, Stack visited)
+	{
+		visited.push(start);
+		System.out.println("Vertex = " + start.nodeData);
+		// We need to get all the Edges.
+		Iterator<VertexNode> iter = this.map.get(start).iterator();
+		while(iter.hasNext()){
+			VertexNode next = iter.next();
+			if(!visited.contains(next))
+				this.DFT(next, visited);
+		}
 	}
 }

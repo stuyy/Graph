@@ -32,5 +32,7 @@ public class GraphDriver {
 				System.out.print(matrix[i][j]);
 			System.out.println();
 		}
+		
+		graph.DFT(new VertexNode("F"));
 	}
 }
