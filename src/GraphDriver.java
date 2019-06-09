@@ -1,17 +1,21 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class GraphDriver {
-	public static void main(String [] args) throws Exception
+
+	public static void main(String [] args)
 	{
-		Graph graph = new Graph();
-		// Add all vertices.
-		VertexNode A = new VertexNode("Anson");
-		VertexNode B = new VertexNode("Jack");
-		graph.addVertex("Anson");
-		graph.addVertex("Jack");
-		graph.addEdge(A,  B);
-		graph.addEdge(A, B);
-		graph.addEdge(B, A);
-		graph.printEdges("Jack");
+		long start = System.nanoTime();
+		ADTGraph graph = new ADTGraph();
+		VertexNode a = new VertexNode("A");
+		VertexNode b = new VertexNode("B");
+		graph.addVertex(a);
+		graph.addVertex(b);
+		graph.addEdge(a, b);
+		graph.addEdge(a, b);
+		graph.printEdges(a);
+		long end = System.nanoTime();
+		double totalTimeElapsed = end-start;
+		System.out.printf("%f\n", totalTimeElapsed/1000000000);
 	}
 }

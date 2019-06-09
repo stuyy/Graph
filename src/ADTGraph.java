@@ -1,9 +1,10 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ArrayList;
 
 public class ADTGraph {
 	
-	HashMap<VertexNode, ArrayList<VertexNode>> map = new HashMap<>();
+	HashMap<VertexNode, HashSet<VertexNode>> map = new HashMap<>();
 	
 	/**
 	 * Adds a Vertex to the HashMap of the Graph.
@@ -16,7 +17,7 @@ public class ADTGraph {
 		if(this.map.containsKey(node))
 			return false;
 		else {
-			this.map.put(node, new ArrayList<VertexNode>());
+			this.map.put(node, new HashSet<VertexNode>());
 			return true;
 		}
 	}
@@ -32,33 +33,26 @@ public class ADTGraph {
 			System.out.println("Cannot have an edge with a Vertex of itself.");
 			return;
 		}
-		if(this.map.containsKey(a)) // If the map contains VertexNode a
-		{
-			ArrayList<VertexNode> edges = this.map.get(a);
-			if(edges.contains(b))
+		if(this.map.containsKey(a) && this.map.containsKey(b)) // Check if the Map has Vertex 'a', we're adding VertexNode b to VertexNode  a's ArrayList of VertexNodes.
+		{	// If true, then we will check 
+			if(this.map.get(a).contains(b) || this.map.get(b).contains(a))
 			{
-				System.out.println("B is already an edge with A");
-				return;
+				System.out.println("No duplicates.");
 			}
 			else {
-				System.out.println("No edge. Adding...");
 				this.map.get(a).add(b);
+				this.map.get(b).add(a);
 			}
+		}
+		else {
+			System.out.println("Not found");
 		}
 	}
 	
-	public static void main(String [] args)
+	public void printEdges(VertexNode n)
 	{
-		ADTGraph graph = new ADTGraph();
-		VertexNode a = new VertexNode("A");
-		VertexNode b = new VertexNode("B");
-		graph.addVertex(a);
-		graph.addVertex(b);
-		graph.addEdge(a, b);
-		
-		ArrayList<VertexNode> edges = graph.map.get(a);
-		for(VertexNode n : edges)
-			System.out.println(n.nodeData);
-		
+		for(VertexNode node : this.map.get(n))
+			System.out.println(node.nodeData);
 	}
+	
 }
