@@ -45,17 +45,33 @@ public class ADTGraph {
 				this.map.get(b).add(a);
 			}
 		}
+		else if(this.map.containsKey(a)  && !this.map.containsKey(b)) // If VertexNode a is a Vertex, but VertexNode b is not, we add b as a Vertex, and then add the edges.
+		{
+			System.out.println("Node "+   a.nodeData + " exists, but node " + b.nodeData + " doesnt.");
+			this.map.putIfAbsent(b, new HashSet<VertexNode>());
+			this.map.get(a).add(b);
+			this.map.get(b).add(a);
+		}
 		else {
 			System.out.println("Not found");
 		}
 	}
 	
+	/**
+	 * Prints all of the edges of a given Vertex.
+	 * @param n - a VertexNode
+	 */
 	public void printEdges(VertexNode n)
 	{
+		System.out.print("Edges of " + n.nodeData + " - ");
 		for(VertexNode node : this.map.get(n))
-			System.out.println(node.nodeData);
+			System.out.print(node.nodeData + " ");
+		System.out.println();
 	}
 	
+	/**
+	 * Prints all of the vertices of the graph.
+	 */
 	public void printVertices()
 	{
 		for(Map.Entry<VertexNode, HashSet<VertexNode>> entry : this.map.entrySet())

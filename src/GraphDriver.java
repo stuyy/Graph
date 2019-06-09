@@ -16,7 +16,9 @@ public class GraphDriver {
 		graph.printEdges(a);
 		
 		graph.addVertex(new VertexNode("C"));
+		graph.addEdge(a, new VertexNode("D"));
 		
+		graph.addEdge(new VertexNode("E"), new VertexNode("C"));
 		graph.printVertices();
 		
 		long end = System.nanoTime();
