@@ -15,12 +15,7 @@ public class ADTGraph {
 	 */
 	public boolean addVertex(VertexNode node)
 	{
-		if(this.map.containsKey(node))
-			return false;
-		else {
-			this.map.put(node, new HashSet<VertexNode>());
-			return true;
-		}
+		return this.map.putIfAbsent(node, new HashSet<VertexNode>()) ==  null ? true : false;
 	}
 	/**
 	 * Adds an edge to the Graph with two VertexNodes.
@@ -44,15 +39,9 @@ public class ADTGraph {
 			}
 		}
 		else if(this.map.containsKey(a) && !this.map.containsKey(b)) // If VertexNode a is a Vertex, but VertexNode b is not, we add b as a Vertex, and then add the edges.
-		{
-			System.out.println("Node "+   a.nodeData + " exists, but node " + b.nodeData + " doesnt.");
 			this.addEdge(b, a, false);
-		}
 		else if(this.map.containsKey(b) && !this.map.containsKey(a))
-		{
-			System.out.println("Node "+   b.nodeData + " exists, but node " + a.nodeData + " doesnt.");
 			this.addEdge(a, b, false);
-		}
 		else {
 			System.out.println("Not found");
 		}
@@ -68,7 +57,7 @@ public class ADTGraph {
 	{
 		if(flag)
 		{
-			
+			// Add both nodes as a Vertex, and then add their edges.
 		}
 		else {
 			this.map.putIfAbsent(a, new HashSet<VertexNode>());
@@ -100,7 +89,7 @@ public class ADTGraph {
 			System.out.print("Edges: ");
 			for(VertexNode edge : entry.getValue())
 				System.out.print(edge.nodeData + " ");
-			System.out.println();
+			System.out.println("\n");
 		}
 	}
 }
